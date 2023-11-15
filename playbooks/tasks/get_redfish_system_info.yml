@@ -1,0 +1,32 @@
+---
+#- name: Create session
+#  community.general.redfish_command:
+#    category: Sessions
+#    command: CreateSession
+#    baseuri: "{{ host.endpoint }}"
+#    username: "{{ host.username }}"
+#    password: "{{ host.password }}"
+#  register: session_r
+#
+#- name: Debug
+#  debug:
+#    var: session_r
+#
+#- name: Set session token fact
+#  ansible.builtin.set_fact:
+#    session_token: "{{ session_r.session.token }}"
+#    session_uri: "{{ session_r.session.uri }}"
+#    session_id: "{{ session_r.session.uri | split('/') | last }}"
+
+- name: Get CPU inventory
+  community.general.redfish_info:
+    category: Systems
+    command: GetCpuInventory
+    baseuri: "{{ host.endpoint }}"
+    username: "{{ host.username }}"
+    password: "{{ host.password }}"
+  register: cpu_result
+
+- name: Print fetched information
+  ansible.builtin.debug:
+    msg: "{{ cpu_result.redfish_facts.cpu.entries }}"

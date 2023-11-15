@@ -1,0 +1,40 @@
+---
+- name: Get system information from a BMC via Redfish
+  hosts: localhost
+  gather_facts: true
+  vars:
+    http_server_ip: 192.168.69.6
+    http_server_path: /tmp/ocp-http-boot
+    iso_name: agent.x86_64.iso
+    iso_path: ~/agent.x86_64.iso
+
+    bmc_hosts:
+      #- name: suki
+      #  endpoint: suki.mgmt.kemo.labs
+      #  username: ansible
+      #  password: notpassword
+      #  verify_ssl: false
+      - name: serenity
+        endpoint: serenity.mgmt.kemo.labs
+        username: root
+        password: lolpenis
+
+  tasks:
+
+    - name: Get system info
+      ansible.builtin.include_tasks:
+        file: tasks/get_redfish_system_info.yml
+      loop: "{{ bmc_hosts }}"
+      loop_control:
+        loop_var: host
+
+    - name: Start the HTTP server
+      ansible.builtin.include_tasks:
+        file: tasks/start_http_server.yml
+
+    - name: Copy the ISO to the target path
+      ansible.builtin.copy:
+        src: "{{ iso_path }}"
+        dest: "{{ http_server_path }}/{{ iso_name }}"
+        remote_src: true
+        mode: 0755
