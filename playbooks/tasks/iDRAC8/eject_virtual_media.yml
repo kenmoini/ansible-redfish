@@ -10,6 +10,7 @@
   register: virtual_media_state_r
 
 - name: Print fetched information
+  when: debug_redfish
   ansible.builtin.debug:
     msg: "{{ virtual_media_state_r }}"
 

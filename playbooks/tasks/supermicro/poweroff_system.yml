@@ -1,0 +1,18 @@
+---
+- name: Power off the system - SuperMicro
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_reboot_endpoint }}"
+    body_format: json
+    body: '{"ResetType": "ForceOff"}'
+  register: redfish_power_off_result
+
+- name: Debug the result of the power off - SuperMicro
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ redfish_power_off_result }}"

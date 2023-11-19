@@ -1,0 +1,22 @@
+---
+- name: Set the next boot to be from the Virtual CD - iDRAC8
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_import_system_config_endpoint }}"
+    body_format: json
+    body: '{"ShareParameters":{"Target":"ALL"},"ImportBuffer":"<SystemConfiguration><Component FQDD=\"iDRAC.Embedded.1\"><Attribute Name=\"ServerBoot.1#BootOnce\">Enabled</Attribute><Attribute Name=\"ServerBoot.1#FirstBootDevice\">VCD-DVD</Attribute></Component></SystemConfiguration>"}'
+    status_code: 202
+  register: redfish_boot_once_result
+  retries: 10
+  delay: 10
+  until: redfish_boot_once_result.status == 202
+
+- name: Debug the result of the boot once - iDRAC8
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ redfish_boot_once_result }}"

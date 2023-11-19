@@ -1,12 +1,40 @@
 ---
 - name: Set the facts for this host
   ansible.builtin.include_tasks:
-    file: "{{ host.system_type }}/set_facts.yml"
+    file: "{{ host.system_type | lower }}/set_facts.yml"
 
 - name: Eject Virtual Media
   ansible.builtin.include_tasks:
-    file: "{{ host.system_type }}/eject_virtual_media.yml"
+    file: "{{ host.system_type | lower }}/eject_virtual_media.yml"
 
 - name: Insert Virtual Media
   ansible.builtin.include_tasks:
-    file: "{{ host.system_type }}/insert_virtual_media.yml"
+    file: "{{ host.system_type | lower }}/insert_virtual_media.yml"
+
+- name: Set the next boot to be from the Virtual CD
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type | lower }}/set_boot_once.yml"
+
+- name: Power Off the system
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type | lower }}/poweroff_system.yml"
+
+- name: Wait 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Set the next boot to be from the Virtual CD
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type | lower }}/set_boot_once.yml"
+
+- name: Power on the system
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type | lower }}/poweron_system.yml"
+
+- name: Wait 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Set the next boot to be from the Virtual CD
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type | lower }}/set_boot_once.yml"

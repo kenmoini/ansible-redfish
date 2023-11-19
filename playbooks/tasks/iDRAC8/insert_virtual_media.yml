@@ -9,5 +9,9 @@
     method: POST
     url: "{{ redfish_virtual_media_insert_endpoint }}"
     body_format: json
-    body: '{"Image": "{{ iso_url_host }}{{ iso_url_path }}"}'
+    body: '{"Image": "{{ iso_url }}"}'
     status_code: 204
+  register: redfish_virtual_media_insert_result
+  retries: 10
+  delay: 10
+  until: redfish_virtual_media_insert_result.status == 204
