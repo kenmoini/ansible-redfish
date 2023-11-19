@@ -26,7 +26,9 @@
     username: "{{ host.username }}"
     password: "{{ host.password }}"
   register: cpu_result
+  ignore_errors: true
 
 - name: Print fetched information
+  when: cpu_result.redfish_facts is defined
   ansible.builtin.debug:
     msg: "{{ cpu_result.redfish_facts.cpu.entries }}"

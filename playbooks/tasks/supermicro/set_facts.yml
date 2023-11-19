@@ -1,0 +1,8 @@
+---
+- name: Set facts for SuperMicro Redfish endpoints
+  ansible.builtin.set_fact:
+    redfish_manager_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/1"
+    redfish_system_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/1"
+    redfish_virtual_media_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/1/VM1/1"
+    redfish_virtual_media_insert_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/1/VM1/CfgCD/Actions/IsoConfig.Mount"
+    redfish_virtual_media_eject_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/1/VM1/CfgCD/Actions/IsoConfig.UnMount"

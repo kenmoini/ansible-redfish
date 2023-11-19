@@ -1,0 +1,12 @@
+---
+- name: Eject virtual media - Supermicro
+  ansible.builtin.uri:
+    url: "{{ redfish_virtual_media_eject_endpoint }}"
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+  register: virtual_media_eject_r
+  failed_when: virtual_media_eject_r.status != 200

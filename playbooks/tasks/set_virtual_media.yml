@@ -8,7 +8,8 @@
     username: "{{ host.username }}"
     password: "{{ host.password }}"
     virtual_media:
-      image_url: "http://{{ http_server_ip }}:{{ http_server_port | default('7654') }}/{{ iso_name | default('agent_x86_64.iso') }}"
+      image_url: "{{ iso_url }}"
+      #image_url: "http://{{ http_server_ip }}:{{ http_server_port | default('7654') }}/{{ iso_name | default('agent_x86_64.iso') }}"
       media_types:
         - CD
         - DVD

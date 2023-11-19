@@ -1,0 +1,10 @@
+---
+- name: Insert the target ISO into the Virtual CD Device - Supermicro
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_virtual_media_insert_endpoint }}?host={{ iso_url_host | urlencode }}&path={{ iso_url_path | urlencode }}"

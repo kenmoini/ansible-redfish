@@ -1,0 +1,13 @@
+---
+- name: Insert the target ISO into the Virtual CD Device - iDRAC8
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_virtual_media_insert_endpoint }}"
+    body_format: json
+    body: '{"Image": "{{ iso_url_host }}{{ iso_url_path }}"}'
+    status_code: 204

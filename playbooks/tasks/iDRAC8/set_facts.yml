@@ -1,0 +1,8 @@
+---
+- name: Set facts for 13th Generation Dell iDRAC systems
+  ansible.builtin.set_fact:
+    redfish_manager_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1"
+    redfish_system_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1"
+    redfish_virtual_media_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia"
+    redfish_virtual_media_insert_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia/CD/Actions/VirtualMedia.InsertMedia"
+    redfish_virtual_media_eject_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia/CD/Actions/VirtualMedia.EjectMedia"

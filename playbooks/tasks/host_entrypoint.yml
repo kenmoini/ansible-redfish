@@ -1,0 +1,12 @@
+---
+- name: Set the facts for this host
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type }}/set_facts.yml"
+
+- name: Eject Virtual Media
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type }}/eject_virtual_media.yml"
+
+- name: Insert Virtual Media
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type }}/insert_virtual_media.yml"
