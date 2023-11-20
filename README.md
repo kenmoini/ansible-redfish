@@ -18,3 +18,5 @@ This automation will allow you to boot a set of systems from a network hosted IS
 
 - Add Lenovo Redfish interfacing
 - Add Fakefish/Sushy-tools interfacing
+- Add Cisco interfacing
+- Add IBM interfacing
