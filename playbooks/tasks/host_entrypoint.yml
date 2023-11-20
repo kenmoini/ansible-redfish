@@ -30,11 +30,3 @@
 - name: Power on the system
   ansible.builtin.include_tasks:
     file: "{{ host.system_type | lower }}/poweron_system.yml"
-
-- name: Wait 10 seconds
-  ansible.builtin.pause:
-    seconds: 10
-
-- name: Set the next boot to be from the Virtual CD
-  ansible.builtin.include_tasks:
-    file: "{{ host.system_type | lower }}/set_boot_once.yml"
