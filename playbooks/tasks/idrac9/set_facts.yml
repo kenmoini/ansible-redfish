@@ -1,0 +1,10 @@
+---
+- name: Set facts for 14th Generation Dell iDRAC9 systems
+  ansible.builtin.set_fact:
+    redfish_manager_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1"
+    redfish_system_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1"
+    redfish_virtual_media_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia"
+    redfish_virtual_media_insert_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia/CD/Actions/VirtualMedia.InsertMedia"
+    redfish_virtual_media_eject_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia/CD/Actions/VirtualMedia.EjectMedia"
+    redfish_reboot_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/Actions/ComputerSystem.Reset"
+    redfish_import_system_config_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/Actions/Oem/EID_674_Manager.ImportSystemConfiguration"

@@ -1,0 +1,29 @@
+---
+- name: Get the state of the virtual media device - iDRAC9
+  ansible.builtin.uri:
+    url: "{{ redfish_virtual_media_endpoint }}/CD"
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: GET
+  register: virtual_media_state_r
+
+- name: Print fetched information
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ virtual_media_state_r }}"
+
+- name: Eject virtual media - iDRAC9
+  when: virtual_media_state_r.json['Inserted'] != false
+  ansible.builtin.uri:
+    url: "{{ redfish_virtual_media_eject_endpoint }}"
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    body_format: json
+    body: '{}'
+    method: POST
+    status_code: 204
+  register: virtual_media_eject_r

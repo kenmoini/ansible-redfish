@@ -5,20 +5,27 @@
   vars:
     debug_redfish: false
 
-    iso_url: http://deep-thought.kemo.labs:9080/linux/isos/rhel-9.2-x86_64-dvd.iso
+    #iso_url: http://deep-thought.kemo.labs:9080/linux/isos/rhel-9.2-x86_64-dvd.iso
+    iso_url: http://10.6.4.152:8080/rhel-9.2-x86_64-dvd.iso
 
     bmc_hosts:
-      - name: endurance
-        endpoint: endurance.mgmt.kemo.labs
-        username: ansible
-        password: n0tPassword
-        system_type: supermicro
+      #- name: endurance
+      #  endpoint: endurance.mgmt.kemo.labs
+      #  username: ansible
+      #  password: n0tPassword
+      #  system_type: supermicro
 
-      - name: serenity
-        endpoint: serenity.mgmt.kemo.labs
-        username: ansible
-        password: n0tPassword
-        system_type: iDRAC8
+      #- name: serenity
+      #  endpoint: serenity.mgmt.kemo.labs
+      #  username: ansible
+      #  password: n0tPassword
+      #  system_type: iDRAC8
+
+      #- name: dell-per640
+      #  endpoint: 10.1.2.3
+      #  username: root
+      #  password: calvin
+      #  system_type: iDRAC9
 
   tasks:
 
