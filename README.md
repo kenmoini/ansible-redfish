@@ -16,7 +16,9 @@ This automation will allow you to boot a set of systems from a network hosted IS
 
 ## Todo
 
-- Add Lenovo Redfish interfacing
+- Add HPE iLO 4
 - Add Fakefish/Sushy-tools interfacing
+- Add Lenovo Redfish interfacing
 - Add Cisco interfacing
 - Add IBM interfacing
+- Add Gigabyte interfacing
