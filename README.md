@@ -7,6 +7,7 @@ This automation will allow you to boot a set of systems from a network hosted IS
 - SuperMicro
 - Dell iDRAC 8
 - Dell iDRAC 9
+- HPE iLO 5
 
 ## Known Issues
 
