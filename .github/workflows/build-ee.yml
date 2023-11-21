@@ -22,8 +22,8 @@ jobs:
   call-deploy-workflow:
     uses: kenmoini/ocp4-ai-svc-universal/.github/workflows/base-build-deploy-ee.yml@main
     with:
-      EE_FOLDER_NAME: ''
-      EE_IMAGE_NAME: 'openshift-ztp-ee'
+      EE_FOLDER_NAME: 'execution-environment'
+      EE_IMAGE_NAME: 'ansible-redfish-ee'
       EE_IMAGE_TAG: 'latest'
     secrets:
       REGISTRY_HOSTNAME: ${{ secrets.REGISTRY_HOSTNAME }}
