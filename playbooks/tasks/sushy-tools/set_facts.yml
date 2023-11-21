@@ -1,0 +1,9 @@
+---
+- name: Set facts for sushy-tools Redfish endpoints
+  ansible.builtin.set_fact:
+    redfish_manager_endpoint: "{{ host.endpoint_protocol }}://{{ host.endpoint }}/redfish/v1/Managers/{{ host.name }}"
+    redfish_system_endpoint: "{{ host.endpoint_protocol }}://{{ host.endpoint }}/redfish/v1/Systems/{{ host.name }}"
+    redfish_virtual_media_endpoint: "{{ host.endpoint_protocol }}://{{ host.endpoint }}/redfish/v1/Managers/{{ host.name }}/VirtualMedia/Cd"
+    redfish_virtual_media_insert_endpoint: "{{ host.endpoint_protocol }}://{{ host.endpoint }}/redfish/v1/Managers/{{ host.name }}/VirtualMedia/Cd/Actions/VirtualMedia.InsertMedia"
+    redfish_virtual_media_eject_endpoint: "{{ host.endpoint_protocol }}://{{ host.endpoint }}/redfish/v1/Managers/{{ host.name }}/VirtualMedia/Cd/Actions/VirtualMedia.EjectMedia"
+    redfish_reboot_endpoint: "{{ host.endpoint_protocol }}://{{ host.endpoint }}/redfish/v1/Systems/{{ host.name }}/Actions/ComputerSystem.Reset"

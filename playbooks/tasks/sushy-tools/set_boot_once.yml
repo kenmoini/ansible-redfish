@@ -1,0 +1,19 @@
+---
+- name: Set the next boot to be from the Virtual CD - sushy-tools
+  ansible.builtin.uri:
+    #force_basic_auth: true
+    #user: "{{ host.username }}"
+    #password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: PATCH
+    url: "{{ redfish_system_endpoint }}"
+    body_format: json
+    body: '{"Boot":{ "BootSourceOverrideEnabled": "Once", "BootSourceOverrideTarget": "Cd"}}'
+    status_code: 204
+  register: redfish_boot_once_result
+
+- name: Debug the result of the boot once - sushy-tools
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ redfish_boot_once_result }}"

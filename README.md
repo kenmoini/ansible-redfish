@@ -4,11 +4,12 @@ This automation will allow you to boot a set of systems from a network hosted IS
 
 ## Supported Systems
 
-- SuperMicro
 - Dell iDRAC 8
 - Dell iDRAC 9
 - HPE iLO 5
 - HPE iLO 4
+- SuperMicro
+- sushy-tools
 
 ## Usage
 
@@ -52,6 +53,13 @@ bmc_hosts:
     username: Administrator
     password: password
     system_type: iLO4
+
+  # sushy-tools Example
+  # name is the UUID of the VM
+  - name: 1baa7e2b-9cc6-426f-b0ab-d309b3030f57
+    endpoint: 192.168.42.40:8111
+    endpoint_protocol: http
+    system_type: sushy-tools
 ```
 
 3. Run the Playbook: `ansible-playbook -e "@bmc-hosts.secret-vars.yml" -e iso_url="http://example.com/path/to/boot.iso" playbooks/boot_iso.yml`
@@ -84,7 +92,6 @@ ansible-playbook configure-controller.yml
 
 ## Todo
 
-- Add Fakefish/Sushy-tools interfacing
 - Add Lenovo Redfish interfacing
 - Add Cisco interfacing
 - Add IBM interfacing

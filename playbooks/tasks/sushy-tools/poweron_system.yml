@@ -1,0 +1,19 @@
+---
+- name: Power on the system - sushy-tools
+  ansible.builtin.uri:
+    #force_basic_auth: true
+    #user: "{{ host.username }}"
+    #password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_reboot_endpoint }}"
+    body_format: json
+    body: '{"ResetType": "On"}'
+    status_code: 204
+  register: redfish_power_on_result
+
+- name: Debug the result of the power on - sushy-tools
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ redfish_power_on_result }}"

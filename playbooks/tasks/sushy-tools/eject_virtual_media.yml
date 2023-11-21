@@ -1,0 +1,34 @@
+---
+- name: Get the state of the virtual media device - sushy-tools
+  ansible.builtin.uri:
+    #force_basic_auth: true
+    #user: "{{ host.username }}"
+    #password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    url: "{{ redfish_virtual_media_endpoint }}"
+    method: GET
+  register: virtual_media_state_r
+
+- name: Print fetched information - sushy-tools
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ virtual_media_state_r }}"
+
+- name: Eject virtual media - sushy-tools
+  when: virtual_media_state_r.json['Inserted'] != false
+  ansible.builtin.uri:
+    #force_basic_auth: true
+    #user: "{{ host.username }}"
+    #password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_virtual_media_eject_endpoint }}"
+    status_code: 204
+  register: virtual_media_eject_r
+
+- name: Debug the result of the virtual media eject - sushy-tools
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ virtual_media_eject_r }}"
