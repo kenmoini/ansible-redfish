@@ -1,0 +1,37 @@
+## Doc reference: https://ansible.readthedocs.io/projects/builder/en/latest/definition/#overview
+## This file is used to build your execution environment container image with Ansible
+## You can otherwise use the upstream image at quay.io/kenmoini/ansible-redfish-ee:latest
+
+## Create Containerfile stuffs: `ansible-builder create`
+## Build the EE: `ansible-builder build -t quay.io/yourname/yourimage:tag` - then podman push it
+
+version: 3
+
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: "-v"
+  # Uncomment the following line to build on a supported RHEL 8 image
+  # EE_BASE_IMAGE: "registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8"
+  #EE_BASE_IMAGE: "quay.io/ansible/awx-ee:23.2.0"
+
+dependencies:
+  ansible_core:
+    package_pip: ansible-core==2.14.4
+  ansible_runner:
+    package_pip: ansible-runner
+  galaxy: collections/requirements.yml
+  python: requirements.txt
+  system: bindep.txt
+
+images:
+  base_image:
+    #name: registry.access.redhat.com/ubi9/python-311:1-24.1695131442
+    name: quay.io/centos/centos:stream9
+
+# ansible_config: 'ansible.cfg'
+
+additional_build_steps:
+    #RUN dnf config-manager --set-enabled crb && dnf update -y && dnf clean all && ansible --version
+  prepend_galaxy: |
+    RUN dnf update -y && dnf install git -y && dnf clean all
+  prepend_base: |
+    RUN dnf install -y 'dnf-command(config-manager)' && rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && /usr/bin/crb enable && dnf update -y && dnf install git -y && dnf clean all

@@ -1,0 +1,6 @@
+tar [platform:rpm]
+jq [platform:rpm]
+git [platform:rpm]
+curl-minimal [platform:rpm]
+wget [platform:rpm]
+python3-devel [platform:rpm]

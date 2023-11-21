@@ -1,0 +1,37 @@
+global_organization: Default
+inventory_name: EE-Localhost
+
+controller_projects:
+- name: ansible-redfish
+  organization: "{{ global_organization }}"
+  scm_branch: main
+  scm_clean: 'yes'
+  scm_delete_on_update: 'no'
+  scm_type: git
+  scm_update_on_launch: 'yes'
+  scm_url: https://github.com/kenmoini/ansible-redfish.git
+
+controller_inventories:
+  - name: "{{ inventory_name }}"
+    organization: "{{ global_organization }}"
+    description: Localhost inventory used by EEs
+
+controller_hosts:
+  - name: localhost
+    inventory: "{{ inventory_name }}"
+    variables:
+      ansible_connection: local
+
+controller_execution_environments:
+  - name: "ansible-redfish-ee"
+    image: quay.io/kenmoini/ansible-redfish-ee:latest
+
+controller_templates:
+- name: Boot systems from an ISO via Redfish
+  job_type: run
+  inventory: "{{ inventory_name }}"
+  execution_environment: ansible-redfish-ee
+  survey_enabled: true
+  survey: "{{ lookup('template', 'templates/project_survey.json.j2') | regex_replace('\\n', '') }}"
+  project: ansible-redfish
+  playbook: playbooks/boot_iso.yml

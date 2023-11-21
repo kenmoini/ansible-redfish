@@ -1,0 +1,30 @@
+{
+    "name": "ansible-redfish Survey",
+    "description": "ansible-redfish Survey",
+    "spec": [
+      {
+        "question_description": "ISO Location",
+        "min": 0,
+        "default": "",
+        "max": 128,
+        "required": true,
+        "choices": "",
+        "new_question": true,
+        "variable": "iso_url",
+        "question_name": "ISO HTTP Endpoint",
+        "type": "text"
+      },
+      {
+        "question_description": "Debug Redfish?",
+        "min": 0,
+        "default": "false",
+        "max": 0,
+        "required": true,
+        "choices": "true\nfalse",
+        "new_question": true,
+        "variable": "debug_redfish",
+        "question_name": "Debug Redfish connection output?",
+        "type": "multiplechoice"
+      }
+    ]
+}
