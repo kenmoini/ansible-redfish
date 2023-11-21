@@ -1,0 +1,36 @@
+---
+- name: Get the state of the virtual media device - HPE iLO4
+  ansible.builtin.uri:
+    url: "{{ redfish_virtual_media_endpoint }}"
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    force_basic_auth: true
+    validate_certs: false
+    return_content: true
+    method: GET
+  register: virtual_media_state_r
+
+- name: Print fetched information
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ virtual_media_state_r }}"
+
+- name: Eject virtual media - HPE iLO4
+  when: virtual_media_state_r.json['Inserted'] != false
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: POST
+    url: "{{ redfish_virtual_media_eject_endpoint }}"
+    body_format: json
+    body: '{"Action": "EjectVirtualMedia"}'
+    status_code: 200
+  register: virtual_media_eject_r
+
+- name: Debug the result of the virtual media eject - HPE iLO4
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ virtual_media_eject_r }}"

@@ -1,0 +1,32 @@
+---
+#- name: Set the next boot to be from the Virtual CD - HPE iLO4
+#  ansible.builtin.uri:
+#    force_basic_auth: true
+#    user: "{{ host.username }}"
+#    password: "{{ host.password }}"
+#    validate_certs: false
+#    return_content: true
+#    method: PATCH
+#    url: "{{ redfish_system_endpoint }}/Bios/Boot/Settings"
+#    body_format: json
+#    body: '{"Boot":{ "BootSourceOverrideEnabled": "Once", "BootSourceOverrideTarget": "Usb", "BootSourceOverrideMode": "UEFI"}}'
+#  register: redfish_boot_once_result
+
+- name: Set the next boot to be from the Virtual CD - HPE iLO4
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: PATCH
+    url: "{{ redfish_virtual_media_endpoint }}"
+    body_format: json
+    body: '{"Oem":{ "Hp": {"BootOnNextServerReset": true} }}'
+  register: redfish_boot_once_result
+
+- name: Debug the result of the boot once - HPE iLO4
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ redfish_boot_once_result }}"
+

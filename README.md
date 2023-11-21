@@ -8,6 +8,7 @@ This automation will allow you to boot a set of systems from a network hosted IS
 - Dell iDRAC 8
 - Dell iDRAC 9
 - HPE iLO 5
+- HPE iLO 4
 
 ## Usage
 
@@ -44,6 +45,13 @@ bmc_hosts:
     username: Administrator
     password: password
     system_type: iLO5
+
+  # iLO4 Example
+  - name: hpe-dl20-g9
+    endpoint: 10.1.2.3
+    username: Administrator
+    password: password
+    system_type: iLO4
 ```
 
 3. Run the Playbook: `ansible-playbook -e "@bmc-hosts.secret-vars.yml" -e iso_url="http://example.com/path/to/boot.iso" playbooks/boot_iso.yml`
@@ -76,7 +84,6 @@ ansible-playbook configure-controller.yml
 
 ## Todo
 
-- Add HPE iLO 4
 - Add Fakefish/Sushy-tools interfacing
 - Add Lenovo Redfish interfacing
 - Add Cisco interfacing
