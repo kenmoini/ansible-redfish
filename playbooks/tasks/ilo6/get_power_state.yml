@@ -1,0 +1,21 @@
+---
+- name: Get the system current power state - HPE iLO6
+  ansible.builtin.uri:
+    force_basic_auth: true
+    user: "{{ host.username }}"
+    password: "{{ host.password }}"
+    validate_certs: false
+    return_content: true
+    method: GET
+    url: "{{ redfish_system_endpoint }}"
+    status_code: 200
+  register: redfish_system_power_state
+
+- name: Debug the result of the system power state - HPE iLO6
+  when: debug_redfish
+  ansible.builtin.debug:
+    msg: "{{ redfish_system_power_state }}"
+
+- name: Set the system power state fact - HPE iLO6
+  ansible.builtin.set_fact:
+    redfish_system_power_state: "{{ redfish_system_power_state.json.PowerState | default('Unknown') }}"

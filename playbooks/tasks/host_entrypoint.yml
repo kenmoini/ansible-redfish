@@ -15,7 +15,12 @@
   ansible.builtin.include_tasks:
     file: "{{ host.system_type | lower }}/set_boot_once.yml"
 
+- name: Get the system power state
+  ansible.builtin.include_tasks:
+    file: "{{ host.system_type | lower }}/get_power_state.yml"
+
 - name: Power Off the system
+  when: redfish_system_power_state != 'Off'
   ansible.builtin.include_tasks:
     file: "{{ host.system_type | lower }}/poweroff_system.yml"
 
