@@ -6,6 +6,7 @@ This automation will allow you to boot a set of systems from a network hosted IS
 
 - Dell iDRAC 8
 - Dell iDRAC 9
+- HPE iLO 6
 - HPE iLO 5
 - HPE iLO 4
 - SuperMicro
@@ -39,6 +40,13 @@ bmc_hosts:
     username: root
     password: calvin
     system_type: iDRAC9
+
+  # iLO6 Example
+  - name: hpe-dl120-g11
+    endpoint: 10.1.2.3
+    username: Administrator
+    password: password
+    system_type: iLO6
 
   # iLO5 Example
   - name: hpe-dl120-g10
