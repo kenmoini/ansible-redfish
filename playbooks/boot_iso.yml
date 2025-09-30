@@ -57,3 +57,4 @@
       loop: "{{ bmc_hosts }}"
       loop_control:
         loop_var: host
+        label: "{{ host.name }}"
