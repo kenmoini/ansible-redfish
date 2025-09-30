@@ -6,6 +6,7 @@ This automation will allow you to boot a set of systems from a network hosted IS
 
 - Dell iDRAC 8
 - Dell iDRAC 9
+- Dell iDRAC 10
 - HPE iLO 6
 - HPE iLO 5
 - HPE iLO 4
@@ -18,7 +19,7 @@ This automation will allow you to boot a set of systems from a network hosted IS
 2. Create some vaulted variables that target your BMC hosts that you'll be connecting to: `ansible-vault create bmc-hosts.secret-vars.yml` - it should look something like this:
 
 ```yaml=
-
+---
 bmc_hosts:
   # SuperMicro Example
   - name: endurance
@@ -40,6 +41,13 @@ bmc_hosts:
     username: root
     password: calvin
     system_type: iDRAC9
+
+  # iDRAC10 Example
+  - name: dell-per670
+    endpoint: 10.1.2.3
+    username: root
+    password: calvin
+    system_type: iDRAC10
 
   # iLO6 Example
   - name: hpe-dl120-g11

@@ -29,6 +29,13 @@
       #  password: calvin
       #  system_type: iDRAC9
 
+      # iDRAC10 Example
+      #- name: dell-per670
+      #  endpoint: 10.1.2.3
+      #  username: root
+      #  password: calvin
+      #  system_type: iDRAC10
+
       # iLO5 Example
       #- name: hpe-dl120-g10
       #  endpoint: 10.1.2.3
