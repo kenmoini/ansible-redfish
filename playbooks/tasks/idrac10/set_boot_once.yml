@@ -9,7 +9,7 @@
     method: POST
     url: "{{ redfish_import_system_config_endpoint }}"
     body_format: json
-    body: '{"ShareParameters":{"Target":["IDRAC"]},"ImportBuffer":"<SystemConfiguration><Component FQDD=\"iDRAC.Embedded.1\"><Attribute Name=\"ServerBoot.1#BootOnce\">Enabled</Attribute><Attribute Name=\"ServerBoot.1#FirstBootDevice\">VCD-DVD</Attribute></Component></SystemConfiguration>"}'
+    body: '{"ShareParameters":{"Target":["IDRAC"]},"ImportBuffer":"<SystemConfiguration><Component FQDD=\"iDRAC.Embedded.1\"><Attribute Name=\"ServerBoot.1#BootOnce\">Enabled</Attribute><Attribute Name=\"ServerBoot.1#FirstBootDevice\">vCD-DVD</Attribute></Component></SystemConfiguration>"}'
     status_code: 202
   register: redfish_boot_once_result
   retries: 3
