@@ -1,7 +1,7 @@
 ---
 - name: Get the state of the virtual media device - iDRAC10
   ansible.builtin.uri:
-    url: "{{ redfish_virtual_media_endpoint }}/CD"
+    url: "{{ redfish_virtual_media_endpoint }}/2"
     user: "{{ host.username }}"
     password: "{{ host.password }}"
     validate_certs: false
