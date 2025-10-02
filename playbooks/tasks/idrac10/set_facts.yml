@@ -3,6 +3,8 @@
   ansible.builtin.set_fact:
     virtual_media_device: "{{ iDRAC10_virtual_media_device | default('1') }}"
     alt_virtual_media_device: "{{ (virtual_media_device == '1') | ternary('2', '1') }}"
+    idrac10_eject_alt_media: false
+
     redfish_manager_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1"
     redfish_system_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1"
 
