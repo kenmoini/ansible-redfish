@@ -27,3 +27,36 @@
     method: POST
     status_code: 204
   register: virtual_media_eject_r
+
+- name: Eject the other Remote File Store just to be safe
+  when: idrac10_eject_alt_media
+  block:
+  
+    - name: Get the state of the alternative virtual media device - iDRAC10
+      ansible.builtin.uri:
+        url: "{{ redfish_virtual_media_endpoint }}/{{ alt_virtual_media_device }}"
+        user: "{{ host.username }}"
+        password: "{{ host.password }}"
+        validate_certs: false
+        return_content: true
+        method: GET
+      register: alt_virtual_media_state_r
+    
+    - name: Print fetched information
+      when: debug_redfish
+      ansible.builtin.debug:
+        msg: "{{ alt_virtual_media_state_r }}"
+    
+    - name: Eject alternative virtual media - iDRAC10
+      when: alt_virtual_media_state_r.json['Inserted'] != false
+      ansible.builtin.uri:
+        url: "{{ redfish_virtual_media_eject_endpoint_alt }}"
+        user: "{{ host.username }}"
+        password: "{{ host.password }}"
+        validate_certs: false
+        return_content: true
+        body_format: json
+        body: '{}'
+        method: POST
+        status_code: 204
+      register: virtual_media_eject_r
