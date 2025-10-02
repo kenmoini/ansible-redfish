@@ -8,6 +8,7 @@
     redfish_virtual_media_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia"
     redfish_virtual_media_insert_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/{{ virtual_media_device }}/Actions/VirtualMedia.InsertMedia"
     redfish_virtual_media_eject_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/{{ virtual_media_device }}/Actions/VirtualMedia.EjectMedia"
+    redfish_virtual_media_eject_endpoint_alt: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/{{ (virtual_media_device == '1') | ternary('2', '1') }}/Actions/VirtualMedia.EjectMedia"
 
     redfish_reboot_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/Actions/ComputerSystem.Reset"
     #redfish_import_system_config_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/Actions/Oem/EID_674_Manager.ImportSystemConfiguration"
