@@ -1,15 +1,15 @@
 ---
 - name: Set facts for 16th Generation Dell iDRAC10 systems
   ansible.builtin.set_fact:
+    virtual_media_device: "{{ iDRAC10_virtual_media_device | default('1') }}"
     redfish_manager_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1"
     redfish_system_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1"
 
     redfish_virtual_media_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia"
-    redfish_virtual_media_insert_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/1/Actions/VirtualMedia.InsertMedia"
-    redfish_virtual_media_eject_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/1/Actions/VirtualMedia.EjectMedia"
+    redfish_virtual_media_insert_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/{{ virtual_media_device }}/Actions/VirtualMedia.InsertMedia"
+    redfish_virtual_media_eject_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/VirtualMedia/{{ virtual_media_device }}/Actions/VirtualMedia.EjectMedia"
 
     redfish_reboot_endpoint: "https://{{ host.endpoint }}/redfish/v1/Systems/System.Embedded.1/Actions/ComputerSystem.Reset"
     #redfish_import_system_config_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/Actions/Oem/EID_674_Manager.ImportSystemConfiguration"
     redfish_import_system_config_endpoint: "https://{{ host.endpoint }}/redfish/v1/Managers/iDRAC.Embedded.1/Actions/Oem/OemManager.ImportSystemConfiguration"
-    virtual_media_device: "{{ iDRAC10_virtual_media_device | default('1') }}"
 
