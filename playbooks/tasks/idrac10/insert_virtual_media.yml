@@ -12,6 +12,6 @@
     body: '{"Image": "{{ iso_url }}"}'
     status_code: 204
   register: redfish_virtual_media_insert_result
-  retries: 10
+  retries: 3
   delay: 10
   until: redfish_virtual_media_insert_result.status == 204
